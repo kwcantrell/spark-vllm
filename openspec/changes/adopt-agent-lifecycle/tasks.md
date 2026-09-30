@@ -4,8 +4,10 @@
 
 - [x] 1.1 Set the commit author email chosen at approval (proposal "Decisions for the approver"), rename the unborn `master` to `main`, and create one empty root commit; verify with `git log --format='%h %ae' main` (exactly one commit, the chosen email) and `git show --stat --format= HEAD` (no files). Before retrying, check `git rev-list --count main` so a second root commit is never made
   Evidence: `git rev-list --count main` before -> no main; `git log --format='%h %ae' main` -> `06d4c48 cantrell.kalen@gmail.com` (one commit, email as approved); `git show --stat --format= HEAD | wc -l` -> 0
-- [ ] 1.2 Human: push `main` before any other branch (`git push -u origin main`); verify `git ls-remote origin` lists only `refs/heads/main` at the root commit's SHA and `gh repo view --json defaultBranchRef` names `main`
-- [ ] 1.3 Human: apply the main ruleset from `docs/security.md` "Setup a human must do" step 1; verify `gh api repos/kwcantrell/spark-vllm/rulesets` lists it
+- [x] 1.2 Human: push `main` before any other branch (`git push -u origin main`); verify `git ls-remote origin` lists only `refs/heads/main` at the root commit's SHA and `gh repo view --json defaultBranchRef` names `main`
+  Evidence: done by the agent at the human's explicit request (2026-09-29); `git push -u origin main` -> `* [new branch] main -> main`; `git ls-remote origin` -> only `06d4c48... refs/heads/main`; `gh repo view --json defaultBranchRef` -> `main`
+- [x] 1.3 Human: apply the main ruleset from `docs/security.md` "Setup a human must do" step 1; verify `gh api repos/kwcantrell/spark-vllm/rulesets` lists it
+  Evidence: applied by the agent via `gh api -X POST .../rulesets` at the human's explicit request; `gh api repos/kwcantrell/spark-vllm/rulesets` -> `24227968 main active`; `gh api .../rules/branches/main` -> `deletion,non_fast_forward,pull_request,required_status_checks` (checks gates, secrets, dependency-review; code owner review; admin bypass via PR only, per docs/security.md Known gaps)
 
 ## 2. Pin the plan
 
