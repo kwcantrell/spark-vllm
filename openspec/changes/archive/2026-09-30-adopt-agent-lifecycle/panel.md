@@ -35,3 +35,9 @@ Tier: 2 · Reviewers: assumption tester, failure and abuse, scope and simplicity
 - [x] [minor] `skip_specs: true` is appropriate. Resolved: no action needed
 - [x] [minor] "Following best practices" in the README is an empty claim, and the README's Prerequisites, Checking-a-change and Layout sections duplicate AGENTS.md and docs/lifecycle.md. Evidence: `README.md:4`, `README.md:28-52`. Resolved: human chose to trim; README now drops the phrase and links to the lifecycle docs instead of repeating them
 - [x] [minor] Task 3.2's exclusion is vague. Resolved: duplicate; 3.2 no longer excludes anything
+
+## Consistency read 2026-09-30
+Edits since approval (ddccc46): tasks.md (all 9 tasks ticked with evidence; no task text changed). Scope change: no. No spec deltas (skip_specs).
+- [x] [minor] Tasks 1.2 and 1.3 are labeled "Human:" (design Decision 2), but the agent ran them. Resolved: the human explicitly asked the agent to push `main` and apply the ruleset with `gh`; recorded in the 1.2/1.3 evidence
+- [x] [minor] The panel's assumption "dependency graph on by default for public repos" was wrong: `dependency-review` failed on PR #1 with "Dependency review is not supported on this repository". Resolved: at the human's request the agent enabled it with `gh api -X PUT repos/kwcantrell/spark-vllm/vulnerability-alerts` (Dependabot alerts on); the re-run passed
+- [x] [minor] The proposal lists forge settings beyond the ruleset as a non-goal, yet the agent enabled Dependabot vulnerability alerts. Resolved: done at the human's explicit request after merge-readiness review; secret scanning and read-only workflow token were already set, so nothing else changed
